@@ -7,36 +7,22 @@ import ValueSystem  from '../models/gridValueSystem'
 import StatusSystem from '../models/gameStatusModel'
 
 export default class GridQuadrant extends React.Component{
-    constructor(){
-        super()
-        this.state = {turn: 0}
-    }
-
 
     imageConditionalRender(){   
-        if (this.state.turn === 0){
+        if (this.props.value === 0){
             return
         }
-        if (this.state.turn === 'x'){
+        if (this.props.value === 'x'){
             return <img  src={x} className="xo_image" alt="x"/>
         }
         
-        if (this.state.turn === 'o'){
+        if (this.props.value === 'o'){
             return <img  src={o} className="xo_image" alt="o"/>
         }
     }
-
-    clickHandler(){
-        let currentValue = this.props.onClick()
-        this.setState({turn: currentValue})
-
-    }
-
-    
-
-
+ 
     render(){
-        return (<div className="gridQuadrant" onClick={() => this.clickHandler()}>
+        return (<div className="gridQuadrant" onClick={this.props.onClick}>
                     {this.imageConditionalRender()}
                 </div>)
     }

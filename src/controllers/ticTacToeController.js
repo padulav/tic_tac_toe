@@ -10,7 +10,7 @@ export default class TicTacToeController {
         this.nameSystem = usingNamingSystem
         this.valueSystem = usingValueSystem
         this.gameStatus = usingGameStatus
-
+        this.currentStatus = this.gameStatus.OnGoinG
         this.grid = new Array(9)
         this.grid.fill(this.valueSystem.empty)
     }
@@ -19,7 +19,20 @@ export default class TicTacToeController {
         return this.grid
     }
 
-    emptyGrid(){
+    getValueByPositionName(position){
+        if (position === this.nameSystem.superiorMid  ) {return this.grid[1]}
+        if (position === this.nameSystem.midLeft      ) {return this.grid[3]}
+        if (position === this.nameSystem.midRight     ) {return this.grid[5]}
+        if (position === this.nameSystem.bottomMid    ) {return this.grid[7]}
+        if (position === this.nameSystem.superiorLeft ) {return this.grid[0]}
+        if (position === this.nameSystem.superiorRight) {return this.grid[2]}
+        if (position === this.nameSystem.bottomLeft   ) {return this.grid[6]}
+        if (position === this.nameSystem.bottomRight  ) {return this.grid[8]}
+        if (position === this.nameSystem.center       ) {return this.grid[4]}
+    }
+    
+    restart(){
+        this.currentStatus = this.gameStatus.OnGoinG
         this.grid.fill(this.valueSystem.empty)
     }
 
@@ -30,33 +43,22 @@ export default class TicTacToeController {
     * @return {String}      gameStatus model object
     */
 
-        // positions with 2 win scenarios
-        if (position === this.nameSystem.superiorMid  ) this.grid[1] = value
-        if (position === this.nameSystem.midLeft      ) this.grid[3] = value
-        if (position === this.nameSystem.midRight     ) this.grid[5] = value
-        if (position === this.nameSystem.bottomMid    ) this.grid[7] = value
-
-        //positions with 3 wins scenarios
-        if (position === this.nameSystem.superiorLeft ) this.grid[0] = value
-        if (position === this.nameSystem.superiorRight) this.grid[2] = value
-        if (position === this.nameSystem.bottomLeft   ) this.grid[6] = value        
-        if (position === this.nameSystem.bottomRight  ) this.grid[8] = value
-
-        //positions with 4 wins scenarios 
-        if (position === this.nameSystem.center       ) this.grid[4] = value
-
-
-
-        if (this.isALock()) return this.gameStatus.matchLock
-        if (this.isAWin()){
-            if(value === this.valueSystem.x)
-            return this.gameStatus.matchWinX 
-            else 
-            return this.gameStatus.matchWinO
+        if (this.currentStatus === this.gameStatus.onGoing){
+            // positions with 2 win scenarios
+            if (position === this.nameSystem.superiorMid  ) {this.__fillGridOnIndex(1,value)}
+            if (position === this.nameSystem.midLeft      ) {this.__fillGridOnIndex(3,value)}
+            if (position === this.nameSystem.midRight     ) {this.__fillGridOnIndex(5,value)}
+            if (position === this.nameSystem.bottomMid    ) {this.__fillGridOnIndex(7,value)}
+            //positions with 3 wins scenarios
+            if (position === this.nameSystem.superiorLeft ) {this.__fillGridOnIndex(0,value)}
+            if (position === this.nameSystem.superiorRight) {this.__fillGridOnIndex(2,value)}
+            if (position === this.nameSystem.bottomLeft   ) {this.__fillGridOnIndex(6,value)}
+            if (position === this.nameSystem.bottomRight  ) {this.__fillGridOnIndex(8,value)}
+            //positions with 4 wins scenarios 
+            if (position === this.nameSystem.center       ) {this.__fillGridOnIndex(4,value)}
         }
-        else                return this.gameStatus.onGoing  
 
-            
+        return this.__updateStatus(value)
 
     }
 
@@ -69,34 +71,50 @@ export default class TicTacToeController {
     * @return 
     */
         //horizontal wins
-        if(this.grid[0] === this.grid[1] &&  this.grid[0] === this.grid[2] && this.grid[0]  !== this.valueSystem.empty)
-        {console.log("win scenario 1"); return true}
-
-        if(this.grid[3] === this.grid[4] &&  this.grid[3] === this.grid[5] && this.grid[3]  !== this.valueSystem.empty )
-        {console.log("win scenario 2"); return true}
-
-        if(this.grid[6] === this.grid[7] &&  this.grid[6] === this.grid[8] && this.grid[6] !== this.valueSystem.empty )
-        {console.log("win scenario 3");return true}
-
-
+        if(this.grid[0] === this.grid[1] &&  this.grid[0] === this.grid[2] && this.grid[0] !== this.valueSystem.empty){return true}
+        if(this.grid[3] === this.grid[4] &&  this.grid[3] === this.grid[5] && this.grid[3] !== this.valueSystem.empty){return true}
+        if(this.grid[6] === this.grid[7] &&  this.grid[6] === this.grid[8] && this.grid[6] !== this.valueSystem.empty){return true}
         //vertical wins
-        if(this.grid[0] === this.grid[3] && this.grid[0] === this.grid[6] &&  this.grid[0] !== this.valueSystem.empty )
-        {console.log("win scenario 4"); return true}
-
-        if(this.grid[1] === this.grid[4] &&  this.grid[1] === this.grid[7] &&  this.grid[1] !== this.valueSystem.empty )
-        {console.log("win scenario 5"); return true}
-
-        if(this.grid[2] === this.grid[5] &&  this.grid[2] === this.grid[8] &&  this.grid[2] !== this.valueSystem.empty )
-        {console.log("win scenario 6"); return true}
-
+        if(this.grid[0] === this.grid[3] &&  this.grid[0] === this.grid[6] && this.grid[0] !== this.valueSystem.empty){return true}
+        if(this.grid[1] === this.grid[4] &&  this.grid[1] === this.grid[7] && this.grid[1] !== this.valueSystem.empty){return true}
+        if(this.grid[2] === this.grid[5] &&  this.grid[2] === this.grid[8] && this.grid[2] !== this.valueSystem.empty){return true}
         //diagonal wins
-        if(this.grid[0] === this.grid[4] &&  this.grid[0]  === this.grid[8] &&  this.grid[0] !== this.valueSystem.empty )
-        {console.log("win scenario 7");return true}
-        if(this.grid[2] === this.grid[4] &&  this.grid[2] === this.grid[6]  &&  this.grid[2] !== this.valueSystem.empty )
-        {console.log("win scenario 8");return true}
-        
+        if(this.grid[0] === this.grid[4] &&  this.grid[0] === this.grid[8] && this.grid[0] !== this.valueSystem.empty){return true}
+        if(this.grid[2] === this.grid[4] &&  this.grid[2] === this.grid[6] && this.grid[2] !== this.valueSystem.empty){return true}
+
         return false
         
+    }
+
+    __updateStatus(value){
+        if (this.isALock()){
+            this.currentStatus = this.gameStatus.matchLock
+            return this.gameStatus.matchLock
+        } 
+        else if (this.isAWin()){
+            if(value === this.valueSystem.x && this.currentStatus !== this.gameStatus.matchWinO){
+                this.currentStatus = this.gameStatus.matchWinX
+                return this.gameStatus.matchWinX 
+            }
+            else if(value === this.valueSystem.o && this.currentStatus !== this.gameStatus.matchWinX){
+                this.currentStatus = this.gameStatus.matchWinO
+                return this.gameStatus.matchWinO
+            }
+        }
+        else {
+            this.currentStatus = this.gameStatus.onGoing
+            return this.gameStatus.onGoing  
+        }
+    }
+
+    __fillGridOnIndex(idx, value){
+        if (this.grid[idx]===this.valueSystem.empty){
+            console.log("considered " + this.grid[idx] + " a empty value")
+            this.grid[idx] = value
+        } else{
+            console.log("false")
+            return
+        }
     }
 
 }
