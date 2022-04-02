@@ -40,21 +40,40 @@ code {
 
 .title{
   width: inherit;
+  margin: 30px;
+
+  font-family: "Courier New", Courier;
+  font-weight: 100;
+  font-size: xxx-large;
+  font-variant: small-caps;
+  letter-spacing: 5.8px;
+  word-spacing: 5.4px;
   text-decoration: underline;
   text-decoration-color: #d9c6ff;
   text-decoration-thickness: 1px;
-  font-weight: 100;
-  font-size: xxx-large;
+  text-underline-offset: 4px;
   text-align: center;
-  margin: 30px;
 }
 
 .button{
   background-color: black;
   border: 1px solid #d9c6ff;
   color: #93e4ff;
-  font-family: monospace;
+  font-family: "Courier New", Courier;
+  font-weight: 100;
+  padding: 6px;
+  font-variant: small-caps;
+  letter-spacing: 5.8px;
+  word-spacing: 5.4px;
   font-size: large;
 }
 
 .gameTable{margin: 30px;}
+
+.button:hover{
+  box-shadow: inset 5px 5px 34px 5px rgba(217,198,255,0.14)
+}
+
+.gridQuadrant:hover{
+  box-shadow: inset 5px 5px 34px 5px rgba(217,198,255,0.14)
+}
