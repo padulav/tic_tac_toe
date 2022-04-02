@@ -6,11 +6,10 @@ Hiring test from a private company: develop a react tic tac toe
 
 # Source of the icons 
 
-* [www.flaticon.com/premium-icon/tic-tac-toe_3401145](TicTacToe table)
-* [www.flaticon.com/free-icon/cancel_594332](X icon)
-* [https://www.flaticon.com/free-icon/circle_594381](O icon)
-* [https://www.flaticon.com/free-icon/github_1051326](Github Icon)
-
+* [TicTacToe table](www.flaticon.com/premium-icon/tic-tac-toe_3401145) 
+* [X icon](www.flaticon.com/free-icon/cancel_594332)          
+* [O icon](https://www.flaticon.com/free-icon/circle_594381)  
+* [Github Icon](https://www.flaticon.com/free-icon/github_1051326) 
 
 ## Scripts 
 
