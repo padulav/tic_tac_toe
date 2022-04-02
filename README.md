@@ -7,6 +7,9 @@ Hiring test from a private company: develop a react tic tac toe
 
 ## Scripts 
 
+### Firebase deploy
+
+`$ npm run build | firebase deploy`
 
 ### `npm start`
 
