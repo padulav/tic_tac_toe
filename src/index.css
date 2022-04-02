@@ -41,7 +41,6 @@ code {
 .title{
   width: inherit;
   margin: 30px;
-
   font-family: "Courier New", Courier;
   font-weight: 100;
   font-size: xxx-large;
@@ -76,4 +75,11 @@ code {
 
 .gridQuadrant:hover{
   box-shadow: inset 5px 5px 34px 5px rgba(217,198,255,0.14)
+}
+
+.github{
+  height: 6vh;
+  position:absolute;
+  bottom: 4vh;
+  right: 4vh;
 }
