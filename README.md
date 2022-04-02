@@ -1,6 +1,9 @@
 # Tic Tac Toe
 
+running on https://game-of-the-old.web.app
+
 Hiring test from a private company: develop a react tic tac toe
+
 
 ## Scripts 
 
