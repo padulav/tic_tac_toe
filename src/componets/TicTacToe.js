@@ -2,9 +2,9 @@ import React from "react";
 import Quadrant from './GridQuadrant'
 import TicTacToeController from '../controllers/ticTacToeController'
 
-import NameSystem   from '../models/gridPositionNameSystem'
-import ValueSystem  from '../models/gridValueSystem'
-import StatusSystem from '../models/gameStatusModel'
+import NameSystem   from '../models/NameSystem'
+import ValueSystem  from '../models/ValueSystem'
+import StatusSystem from '../models/StatusModel'
 
 
 export default class TicTacToe extends React.Component{
