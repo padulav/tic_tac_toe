@@ -3,9 +3,10 @@
 export default class TicTacToeController {
     constructor(usingNamingSystem, usingValueSystem, usingGameStatus){
     /**
-    * @param  
-    * @param  
-    * @param
+    * CONSTRUCTOR 
+    * @param  usingNamingSystem NameSystem Object to standardize and avoid the use of string identification across compontes and classes
+    * @param  usingValueSystem ValueSystem Object to standardize and avoid the use of string identification across compontes and classes
+    * @param  usingGameStatus StatusSystem Object to standardize and avoid the use of string identification across compontes and classes
     */
         this.nameSystem = usingNamingSystem
         this.valueSystem = usingValueSystem
@@ -15,11 +16,21 @@ export default class TicTacToeController {
         this.grid.fill(this.valueSystem.empty)
     }
 
-    getGrid()    {
+    getGrid(){
+    /**
+    *  Getter for the game table 
+    * @return {List} List of 9 values within the ValueSystem standart of values
+    */
         return this.grid
     }
 
     getValueByPositionName(position){
+    /**
+    * Getter to access a single value on the game grid using the NameSystem to access the
+    * value on the table
+    * @param  {String} position  position on the grid table within NameSystem standart
+    * @return {String}           value within ValueSystem standart
+    */
         if (position === this.nameSystem.superiorMid  ) {return this.grid[1]}
         if (position === this.nameSystem.midLeft      ) {return this.grid[3]}
         if (position === this.nameSystem.midRight     ) {return this.grid[5]}
@@ -32,15 +43,18 @@ export default class TicTacToeController {
     }
     
     restart(){
+    /**
+    * empties the table and clears the game status so a new game can run 
+    */
         this.currentStatus = this.gameStatus.OnGoinG
         this.grid.fill(this.valueSystem.empty)
     }
 
     updateGrid(position, value){
     /**
-    * @param  {gridPositionNameSystem} position position on the grid table
-    * @param  {gridValueSystem}        value    new value on the position
-    * @return {String}      gameStatus model object
+    * @param  {String}  position  position on the grid table on the NameSystem value
+    * @param  {String}  value     new value on the position on the ValueSystem standart
+    * @return {String}            status string using the StatusSystem standart
     */
 
         if (this.currentStatus === this.gameStatus.onGoing){
@@ -63,12 +77,15 @@ export default class TicTacToeController {
     }
 
     isALock(){
+    /**
+    * @return {Boolean} Verify the scenario in wich the game is over and there is no winners
+    */
         return !this.grid.includes(this.valueSystem.empty) && !this.isAWin()
     }
 
     isAWin(){
     /**
-    * @return 
+    * @return {String} Verify the current game grid is a win scenarios
     */
         //horizontal wins
         if(this.grid[0] === this.grid[1] &&  this.grid[0] === this.grid[2] && this.grid[0] !== this.valueSystem.empty){return true}
@@ -87,6 +104,12 @@ export default class TicTacToeController {
     }
 
     __updateStatus(value){
+    /**
+    * Internal function to prevent the winner to change if 
+    * the function is called and there is already a winner defined 
+    * @param  {String}  position Position within NameSystem standart
+    * @return {String}           status value within StatusSystem standart 
+    */
         if (this.isALock()){
             this.currentStatus = this.gameStatus.matchLock
             return this.gameStatus.matchLock
@@ -108,6 +131,11 @@ export default class TicTacToeController {
     }
 
     __fillGridOnIndex(idx, value){
+    /**
+    * Updates the grid list per index value
+    * @param  {Int}     idx   list index value
+    * @param  {String}  value value within ValueSystem standart
+    */
         if (this.grid[idx]===this.valueSystem.empty){
             console.log("considered " + this.grid[idx] + " a empty value")
             this.grid[idx] = value
@@ -118,36 +146,3 @@ export default class TicTacToeController {
     }
 
 }
-
-
-
-// TEST SCENARIO
-//const nameSystem = require('../models/gridPositionNameSystem').nameSystem
-//const valueSystem = require('../models/gridValueSystem').valueSystem
-//const statusSystem = require('../models/gameStatusModel').gameStatus
-//
-//game = new TicTacToeController (usingNamingSystem=nameSystem, usingValueSystem=valueSystem, usingGameStatus=statusSystem)
-//
-//let status 
-//
-//
-///*
-//lock scenario 
-//                o|o|x
-//                x|x|o
-//                o|x|x
-//*/
-//status= game.updateGrid(position=nameSystem.superiorLeft, value=valueSystem.x)
-//status= game.updateGrid(position=nameSystem.superiorMid, value=valueSystem.x)
-//status= game.updateGrid(position=nameSystem.midRight, value=valueSystem.x)
-//status= game.updateGrid(position=nameSystem.bottomLeft, value=valueSystem.x)
-//status= game.updateGrid(position=nameSystem.superiorRight, value=valueSystem.o)
-//status= game.updateGrid(position=nameSystem.midLeft, value=valueSystem.o)
-//status= game.updateGrid(position=nameSystem.center, value=valueSystem.o)
-//status= game.updateGrid(position=nameSystem.bottomMid, value=valueSystem.o)
-//status= game.updateGrid(position=nameSystem.bottomRight, value=valueSystem.o)
-//
-//console.log(status)
-//console.log(game.getGrid())
-//
-//
